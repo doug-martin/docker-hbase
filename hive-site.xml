@@ -1,0 +1,67 @@
+<configuration>
+  <property>
+    <name>javax.jdo.option.ConnectionURL</name>
+    <value>jdbc:mysql://localhost:3306/metastore</value>
+    <description>the URL of the MySQL database</description>
+  </property>
+
+  <property>
+    <name>javax.jdo.option.ConnectionDriverName</name>
+    <value>com.mysql.jdbc.Driver</value>
+  </property>
+
+  <property>
+    <name>javax.jdo.option.ConnectionUserName</name>
+    <value>hive</value>
+  </property>
+
+  <property>
+    <name>javax.jdo.option.ConnectionPassword</name>
+    <value>mypassword</value>
+  </property>
+
+  <property>
+    <name>datanucleus.autoCreateSchema</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>datanucleus.fixedDatastore</name>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>datanucleus.autoStartMechanism</name> 
+    <value>SchemaTable</value>
+  </property> 
+
+  <property>
+    <name>hive.metastore.uris</name>
+    <value>thrift://localhost:9083</value>
+    <description>IP address (or fully-qualified domain name) and port of the metastore host</description>
+  </property>
+
+  <property>
+    <name>hive.metastore.schema.verification</name>
+    <value>true</value>
+  </property>
+  <!--ZK Config-->
+  <property>
+    <name>hive.support.concurrency</name>
+    <description>Enable Hive's Table Lock Manager Service</description>
+    <value>true</value>
+  </property>
+
+  <property>
+    <name>hive.zookeeper.quorum</name>
+    <description>Zookeeper quorum used by Hive's Table Lock Manager</description>
+    <value>#HOST#</value>
+  </property>
+  <!--add hbase jars-->
+   <property>
+    <name>hive.aux.jars.path</name>
+    <value>file:///usr/lib/hive/lib/zookeeper.jar,file:///usr/lib/hive/lib/hive-hbase-handler.ja,file:///usr/lib/hive/lib/guava-14.0.1.jar,file:///usr/lib/hive/lib/hbase-client.jar,file:///usr/lib/hive/lib/hbase-common.jar,file:///usr/lib/hive/lib/hbase-hadoop-compat.jar,file:///usr/lib/hive/lib/hbase-hadoop2-compat.jar,file:///usr/lib/hive/lib/hbase-protocol.jar,file:///usr/lib/hive/lib/hbase-server.jar,file:///usr/lib/hive/lib/htrace-core.jar
+    </value> 
+  </property>
+
+</configuration>
