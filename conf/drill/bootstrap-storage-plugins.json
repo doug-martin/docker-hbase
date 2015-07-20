@@ -1,0 +1,13 @@
+{
+  "storage":{
+    hbase : {
+    "type": "hbase",
+     "config": {
+      "hbase.zookeeper.quorum": "#HOST#",
+      "hbase.zookeeper.property.clientPort": "2181"
+      },
+      "size.calculator.enabled": false,
+      "enabled": true
+    }
+  }
+}

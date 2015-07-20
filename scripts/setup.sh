@@ -16,6 +16,7 @@ service mysql stop && \
 echo "-----------------------------"
 echo " Configuration HDFS"
 echo "-----------------------------"
+
 # step1: format
 su hdfs -c "hdfs namenode -format"
 

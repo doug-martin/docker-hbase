@@ -4,7 +4,7 @@ echo "============================="
 echo " install jdk7"
 echo "============================="
 
-wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz && \
+wget -nv --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/7u79-b15/jdk-7u79-linux-x64.tar.gz && \
 	mkdir /opt/jdk && \
 	tar -zxf jdk-7u79-linux-x64.tar.gz -C /opt/jdk && \
 	mkdir /usr/java && \

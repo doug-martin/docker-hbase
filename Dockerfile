@@ -4,60 +4,47 @@ MAINTAINER Doug Martin doug@dougamartin.com
 
 ENV DEBIAN_FRONTEND noninteractive
 
+#Copy over install and setup scripts
+COPY scripts /opt/atlas/
+
 # install defaults
-COPY install-defaults.sh install-defaults.sh
-RUN ["/bin/bash", "install-defaults.sh"]
+RUN ["/bin/bash", "/opt/atlas/install-defaults.sh"]
 
 # install java
-COPY install-jdk7.sh install-jdk7.sh
-RUN ["/bin/bash", "install-jdk7.sh"]
+RUN ["/bin/bash", "/opt/atlas/install-jdk7.sh"]
 
 ENV JAVA_HOME /usr/java/default
 
 # install cdh5
-COPY install-cdh5.sh install-cdh5.sh
-RUN ["/bin/bash", "install-cdh5.sh"]
-
-COPY install-drill.sh install-drill.sh
-RUN ["/bin/bash", "install-drill.sh"]
-
-COPY hive-site.xml /etc/hive/conf/hive-site.xml
-
-#Run setup stuff
-COPY setup.sh setup.sh
-RUN ["/bin/bash", "setup.sh"]
+RUN ["/bin/bash", "/opt/atlas/install-cdh5.sh"]
+# install apache drill
+RUN ["/bin/bash", "/opt/atlas/install-drill.sh"]
+#copy over hive-site since it is needed to setup hive
+COPY conf/hive/ /etc/hive/conf/
+#Run setup stuffsh
+RUN ["/bin/bash", "/opt/atlas/setup.sh"]
 
 
-# zookeeper
-EXPOSE 2181
-# HBase Master API port
-EXPOSE 60000
-# HBase Master Web UI
-EXPOSE 60010
-# HBase Regionserver API port
-EXPOSE 60020
-# HBase Regionserver web UI
-EXPOSE 60030
-# Hbase Thrift port
-EXPOSE 9090
-# hive
-EXPOSE 10000
-# hue
-EXPOSE 8888
-#Impala JDBC Port
-EXPOSE 21050
-#Drill UI
-EXPOSE 8047
-#Drill Client
-EXPOSE 31010
+# 2181: zookeeper
+# 60000: HBase Master API port; 
+# 60010 HBase Master Web UI
+# 60020: HBase Regionserver API port; 
+# 60030 HBase Regionserver web UI; 
+# 9090 Hbase Thrift port
+# 10000 hive; 
+# 8888 hue; 
+# 21050 Impala JDBC Port
+# 8047: Drill UI
+# 31010: Drill Client
+EXPOSE 2181 60000 60010 60020 60030 9090 10000 8888 21050 8047 31010
 
 #=======================
 # Start services.
 #=======================
-COPY hbase-site.xml /etc/hbase/conf/hbase-site.xml 
-COPY core-site.xml /etc/hadoop/conf/core-site.xml
-COPY drill-override.conf /etc/drill/drill-override.conf
+COPY conf/hbase/ /etc/hbase/conf/
+COPY conf/hadoop/ /etc/hadoop/conf/
+COPY conf/drill/ /etc/drill/conf/
 
-COPY start.sh start.sh
-ENTRYPOINT ["/bin/bash", "start.sh"]
+
+ENTRYPOINT ["/bin/bash", "/opt/atlas/start.sh"]
 CMD []
